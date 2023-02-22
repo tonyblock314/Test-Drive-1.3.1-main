@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -15,8 +14,6 @@ public class Elevator extends SubsystemBase{
     CANSparkMax followMotor = new CANSparkMax(Constants.Follower_SparkMax_ID, kMotorType);
 
     RelativeEncoder leadEncoder = leadMotor.getEncoder();
-
-    MotorControllerGroup ElevatorControllerGroup = new MotorControllerGroup(leadMotor, followMotor);
 
     public Elevator() {
         /**
@@ -36,5 +33,8 @@ public class Elevator extends SubsystemBase{
          */
         followMotor.follow(leadMotor);
 
+    }
+    public void set(double speed) {
+        leadMotor.set(speed);
     }
 }

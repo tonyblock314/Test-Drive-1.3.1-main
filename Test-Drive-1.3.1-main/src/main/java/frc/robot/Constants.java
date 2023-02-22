@@ -48,15 +48,17 @@ public final class Constants {
     public static final int Follower_SparkMax_ID = 2;
     // public static final int PIGEON_CAN_ID = 9; ;-;
     
-    // Wheel speeds
-    public static final double FEED_SPEED = 0.7; // Speed at which intake wheel feeds to shooter wheel
-    public static final double MAX_INANDOUT_SPEED = 0.2;
+    // Winch speed
+    public static final double MAX_INANDOUT_SPEED = 0.1;
+
+    // Elevator Speed
+    public static final double ELEVATOR_SPEED = 0.1;
 
     // Drive train config
     public static final double MAX_DRIVE_SPEED = 0.9; // MAX POWAAAAAAA!!!
     public static final double DRIVE_TRAIN_RATE_LIMIT = 0.6; // Skew limiters begone
     public static final double TURN_FACTOR = 0.6; // Turn influence decreased
-    public static final double SCALING_FACTOR = MAX_DRIVE_SPEED / (1 + TURN_FACTOR);
+    public static final double SCALING_FACTOR = MAX_DRIVE_SPEED / (1.5 + TURN_FACTOR);
 
     public static final double RAW_SENSOR_UNITS_TO_DRIVE_METERS = 1.948201497395833e-5; // Roughly 50000 sensor units per meter
     // 2048 raw units per motor rotation

@@ -34,10 +34,6 @@ public class RobotContainer {
       driver::getLeftY,
       driver::getRightX,
       driver::getXButtonPressed));
-    m_elevator.setDefaultCommand(new UpAndDown(
-      m_elevator,
-      driver::getRightBumperPressed,
-      driver::getLeftBumperPressed));
     m_winch.setDefaultCommand(new InAndOut(
       m_winch, 
       driver::getRightTriggerAxis,
@@ -49,8 +45,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create buttons to link to commands
     JoystickButton xboxControllerLeftStickButton = new JoystickButton(driver, Constants.XBOX_LEFT_STICK_BUTTON);
+    JoystickButton xboxControllerLeftBumper = new JoystickButton(driver, Constants.XBOX_LEFT_BUMPER);
+    JoystickButton xboxControllerRightBumper = new JoystickButton(driver, Constants.XBOX_RIGHT_BUMPER);
     // Link triggers to commands
-
+    xboxControllerLeftBumper.whileHeld(new UpAndDown(m_elevator, -Constants.ELEVATOR_SPEED));
+    xboxControllerRightBumper.whileHeld(new UpAndDown(m_elevator, Constants.ELEVATOR_SPEED));
     // Link buttons to Commands
     xboxControllerLeftStickButton.whileHeld(new ZOOM(m_driveTrain));
     

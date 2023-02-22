@@ -13,10 +13,7 @@ import frc.robot.subsystems.DriveTrain.Mode;
 
 public class Autonomous extends SequentialCommandGroup {
   /**
-   * Schedules all the necessary commands to automatically drive back 3 feet and shoot a ball
    * First, gets drive train to drive backwards for a practically determined amount of time;
-   * Then, gets the shooter system up to speed (since motors take a little bit to get to full speed)
-   * Next, uses the intake wheels (where balls are stored since we have no official storage) to feed the balls into the shooter
    * Finally, turns all off
    */
   public Autonomous(DriveTrain driveTrain) {

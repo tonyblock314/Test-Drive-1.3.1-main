@@ -1,7 +1,5 @@
 package frc.robot.commands.Elevator;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 
@@ -9,14 +7,11 @@ import frc.robot.subsystems.Elevator;
 public class UpAndDown extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Elevator m_elevator;
-    private BooleanSupplier rightBumperPressed;
-    private BooleanSupplier leftBumperPressed;
+    private final double speed;
 
-    public UpAndDown(Elevator elevatorSubsystem, BooleanSupplier rightBumperPressed, BooleanSupplier leftBumperPressed) {
-        this.m_elevator = elevatorSubsystem;
-        this.rightBumperPressed = rightBumperPressed;
-        this.leftBumperPressed = leftBumperPressed;
-        //use addRequirements() here to declare subsystem dependencies.
+    public UpAndDown(Elevator elevatorSubsystem, double speed) {
+        m_elevator = elevatorSubsystem;
+        this.speed = speed;
         addRequirements(m_elevator);
     }
 
@@ -29,16 +24,7 @@ public class UpAndDown extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double speed = 0.2;
-        boolean RBumperAsBoolean = rightBumperPressed.getAsBoolean();
-        boolean LBumperAsBoolean = leftBumperPressed.getAsBoolean();
-        if (RBumperAsBoolean = true) {
-            Elevator.leadMotor.set(speed);
-        } else if (LBumperAsBoolean = true) {
-            Elevator.leadMotor.set(-speed);
-        } else {
-            Elevator.leadMotor.set(0);
-        }
+        m_elevator.set(speed);
     }
 
     // Caleed once the command ends or is interrupted.
