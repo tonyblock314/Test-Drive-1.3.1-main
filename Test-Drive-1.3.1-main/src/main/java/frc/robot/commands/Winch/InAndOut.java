@@ -12,21 +12,31 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class InAndOut extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private Winch m_subsystem;
-  private DoubleSupplier speed1;
-  private DoubleSupplier speed2;
+  private DoubleSupplier rtTrig;
+  private DoubleSupplier ltTrig;
 
-    public InAndOut(Winch winchsubsystem, DoubleSupplier rightTriggerDepression, DoubleSupplier leftTriggerDepression) {
-      m_subsystem = winchsubsystem;
-      this.speed1 = rightTriggerDepression;
-      this.speed2 = leftTriggerDepression;
-      addRequirements(winchsubsystem);
-    }
+  public InAndOut(Winch winchsubsystem, DoubleSupplier rightTriggerDepression, DoubleSupplier leftTriggerDepression) {
+    m_subsystem = winchsubsystem;
+    this.rtTrig = rightTriggerDepression;
+    this.ltTrig = leftTriggerDepression;
+    addRequirements(winchsubsystem);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double upspeed = speed1.getAsDouble() > Constants.LT_DEADBAND ? speed1.getAsDouble() * Constants.MAX_INANDOUT_SPEED : 0;
-    double downspeed = speed2.getAsDouble() > Constants.LT_DEADBAND ? speed2.getAsDouble() * Constants.MAX_INANDOUT_SPEED : 0;
+    double upspeed;
+    if(rtTrig.getAsDouble() > Constants.RT_DEADBAND){
+      upspeed = rtTrig.getAsDouble() * Constants.MAX_INANDOUT_SPEED;
+    }
+    else{
+      upspeed = 0;
+    }
+    System.out.println("Setting upspeed to " + upspeed);
+
+    double downspeed = ltTrig.getAsDouble() > Constants.LT_DEADBAND ? ltTrig.getAsDouble() * Constants.MAX_INANDOUT_SPEED : 0;
+    System.out.println("Setting downspeed to " + downspeed);
+
     m_subsystem.setWheelSpeed(upspeed - downspeed);
   }
 

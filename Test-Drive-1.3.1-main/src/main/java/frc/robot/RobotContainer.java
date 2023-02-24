@@ -44,10 +44,12 @@ public class RobotContainer {
       driver::getLeftY,
       driver::getRightX,
       driver::getXButtonPressed));
+
     m_winch.setDefaultCommand(new InAndOut(
       m_winch, 
       driver::getRightTriggerAxis,
       driver::getLeftTriggerAxis));
+    
     autoCommand = new Autonomous(m_driveTrain);
     configureButtonBindings();
   }

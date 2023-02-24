@@ -24,6 +24,7 @@ public class Winch extends SubsystemBase {
    public void setWheelSpeed(double speed) {
     // Updates shooter wheel speed on dashboard
     SmartDashboard.putNumber("Shooter Speed: ", speed);
+    System.out.println("Shooter Speed: " + speed);
     Winch.set(speed);
   }
 }

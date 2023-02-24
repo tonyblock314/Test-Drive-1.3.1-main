@@ -49,10 +49,10 @@ public final class Constants {
     // public static final int PIGEON_CAN_ID = 9; ;-;
     
     // Winch speed
-    public static final double MAX_INANDOUT_SPEED = 0.1;
+    public static final double MAX_INANDOUT_SPEED = 0.6;
 
     // Elevator Speed
-    public static final double ELEVATOR_SPEED = 0.1;
+    public static final double ELEVATOR_SPEED = 0.2;
 
     // Drive train config
     public static final double MAX_DRIVE_SPEED = 0.9; // MAX POWAAAAAAA!!!
