@@ -5,22 +5,32 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+// Controller imports
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // All Drive Train commands and subsystems
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Winch;
-import frc.robot.commands.Auto.Autonomous;
 import frc.robot.commands.DriveTrain.WestCoastDrive;
 import frc.robot.commands.DriveTrain.ZOOM;
+// All Elevator commands and subsystems
+import frc.robot.subsystems.Elevator;
 import frc.robot.commands.Elevator.UpAndDown;
+// All Claw commands and subsystems
+import frc.robot.subsystems.PistonClaw;
+import frc.robot.commands.Claw.CloseClaw;
+import frc.robot.commands.Claw.OpenClaw;
+// All Winch commands and subsystems
+import frc.robot.subsystems.Winch;
 import frc.robot.commands.Winch.InAndOut;
+// Autonomus
+import frc.robot.commands.Auto.Autonomous;
+
 
 public class RobotContainer {
   // Create subsystems
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Elevator m_elevator = new Elevator();
+  private final PistonClaw m_claw = new PistonClaw();
   private final Winch m_winch = new Winch();
   private final Autonomous autoCommand;
 
@@ -47,13 +57,15 @@ public class RobotContainer {
     JoystickButton xboxControllerLeftStickButton = new JoystickButton(driver, Constants.XBOX_LEFT_STICK_BUTTON);
     JoystickButton xboxControllerLeftBumper = new JoystickButton(driver, Constants.XBOX_LEFT_BUMPER);
     JoystickButton xboxControllerRightBumper = new JoystickButton(driver, Constants.XBOX_RIGHT_BUMPER);
+    JoystickButton xboxControllerAButton = new JoystickButton(driver, Constants.XBOX_A_BUTTON);
+    JoystickButton xboxControllerBButton = new JoystickButton(driver, Constants.XBOX_B_BUTTON);
     // Link triggers to commands
     xboxControllerLeftBumper.whileHeld(new UpAndDown(m_elevator, -Constants.ELEVATOR_SPEED));
     xboxControllerRightBumper.whileHeld(new UpAndDown(m_elevator, Constants.ELEVATOR_SPEED));
     // Link buttons to Commands
     xboxControllerLeftStickButton.whileHeld(new ZOOM(m_driveTrain));
-    
-    // COMMENTED OUT FOR DRIVING xboxControllerRightBumper.whileHeld(new UpAndDown(m_elevator));
+    xboxControllerAButton.whenPressed(new CloseClaw(m_claw));
+    xboxControllerBButton.whenPressed(new OpenClaw(m_claw));
   }
 
   public Command getAutonomousCommand() {
